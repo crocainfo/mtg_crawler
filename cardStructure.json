@@ -1,0 +1,9 @@
+{
+  "name": "",
+  "lang": "",
+  "price": {"nm": "", "ex": "", "foil_nm": "", "foil_ex": ""},
+  "currency": "",
+  "img": {"medium": "", "little": "", "foil_medium": "", "foil_little": ""},
+  "link": {"normal": "", "foil": ""}
+
+}
