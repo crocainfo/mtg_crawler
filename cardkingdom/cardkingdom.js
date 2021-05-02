@@ -24,9 +24,7 @@ const path = require('path');
 
     for (let i = 0; i < 5; i++) {
         const newTab = await browser.newPage();
-        console.log(expansionLinks[i][1]);
         await newTab.goto(expansionLinks[i][1]);
-        console.log("hola");
         await newTab.close();
     }
 
