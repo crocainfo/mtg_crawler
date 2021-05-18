@@ -29,7 +29,10 @@ const path = require('path');
     //Loads Card Object Base
     let cardJSON = fs.readFileSync(path.resolve("", 'cardStructure.json'));
     let card = JSON.parse(cardJSON);
-    let expansions = {};
+    let expansions = fs.readFileSync(path.resolve("expansionLibraryNames.json"));
+    expansions= JSON.parse(expansions);
+
+
 
     //Loop over expansions
     for (let i = 0; i < expansionLinks.length; i++) {
@@ -185,19 +188,21 @@ const path = require('path');
         } catch (error) {
             console.log("No Foils found in " + expansionName + " expansion" );
         }
-        //Adds to the object to keep track of the expansions names
-        expansions.expansionName = expansionName;
 
-        console.log("Ended with "+ expansionName);
+
+        //Adds to the object to keep track of the expansions names
+        expansions[expansionName] = expansionLinks[i][0];
+
+        // console.log("Ended with "+ expansionName);
 
         //Closes the tab when ends with expansion
         await newTab.close();
     }
 
     //Saves a log of the expansions intependently
-    let allExpansions = JSON.stringify(expansions, null, 2);
-    let filename = "expansions.js";
-    fs.writeFileSync(path.resolve(filename), allExpansions );
+    let expansionsJSON = JSON.stringify(expansions, null, 2);
+    fs.writeFileSync(path.resolve('expansionLibraryNames.json'), expansionsJSON);
+
 
     //Finished so we close the browser
     await browser.close();
